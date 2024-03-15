@@ -27,6 +27,12 @@ jobs:
       - name: Build Initial with Maven
         working-directory: ./initial
         run: ./mvnw --batch-mode clean test
-
-
         
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            test-results/**/*.xml
+            test-results/**/*.trx
+            test-results/**/*.json
